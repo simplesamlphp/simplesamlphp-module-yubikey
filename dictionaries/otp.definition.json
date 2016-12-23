@@ -1,0 +1,5 @@
+{
+  "intro": {
+    "en": "In order to complete your login, you need to authenticate using a YubiKey. Please insert your YubiKey and touch it. The field below will then be filled out automatically with a secure one time password."
+  }
+}

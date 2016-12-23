@@ -1,0 +1,17 @@
+{
+    "name": "simplesamlphp/simplesamlphp-module-yubikey",
+    "description": "A SimpleSAMLphp module that adds support for YubiKey devices.",
+    "type": "simplesamlphp-module",
+    "keywords": [ "simplesamlphp", "yubikey", "otp" ],
+    "authors": [
+        {
+            "name": "Jaime Pérez Crespo",
+            "email": "jaime.perez@uninett.no"
+        }
+    ],
+    "require": {
+		"enygma/yubikey": "~3.2",
+        "simplesamlphp/composer-module-installer": "~1.1.5"
+    }
+}
+
