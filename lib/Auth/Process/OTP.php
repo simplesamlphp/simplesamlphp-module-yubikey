@@ -108,7 +108,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
         $this->apiClient = $cfg->getString('api_client_id');
         $this->apiKey = $cfg->getString('api_key');
         $this->abortIfMissing = $cfg->getBoolean('abort_if_missing', false);
-        $this->keyIdAttr = $cfg->getBoolean('key_id_attribute', 'yubikey');
+        $this->keyIdAttr = $cfg->getString('key_id_attribute', 'yubikey');
         $this->assuranceAttr = $cfg->getString('assurance_attribute', 'eduPersonAssurance');
         $this->assuranceValue = $cfg->getString('assurance_value', 'OTP');
         $this->apiHosts = $cfg->getArrayize('api_hosts', array(
