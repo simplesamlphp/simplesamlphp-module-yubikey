@@ -11,7 +11,7 @@ $this->includeAtTemplateBase('includes/header.php');
          src="<?php echo SimpleSAML\Module::getModuleURL('yubikey/img/yubikey.png'); ?>" alt="YubiKey"/>
     <form action="?" method="post" name="f">
         <p><?php echo $this->t('{yubikey:otp:intro}'); ?></p>
-        <p><input id="otp" type="text" tabindex="2" name="otp"
+        <p><input id="otp" type="password" tabindex="2" name="otp"
                   style="border: 1px solid #ccc; background: #eee; padding: .5em; font-size: medium; width: 70%;
                          color: #aaa; cursor: not-allowed" />
         </p>
