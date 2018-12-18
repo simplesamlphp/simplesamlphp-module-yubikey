@@ -30,6 +30,6 @@ if (array_key_exists('otp', $_POST)) { // we were given an OTP
 $cfg = \SimpleSAML\Configuration::getInstance();
 $tpl = new \SimpleSAML\XHTML\Template($cfg, 'yubikey:otp.php');
 $trans = $tpl->getTranslator();
-$tpl->data['params'] = array('StateId' => $authStateId);
+$tpl->data['params'] = ['StateId' => $authStateId];
 $tpl->data['error'] = ($error) ? $trans->t($error) : false;
 $tpl->show();
