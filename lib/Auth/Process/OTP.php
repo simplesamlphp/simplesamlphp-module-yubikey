@@ -12,7 +12,6 @@ use \SimpleSAML\Logger as Logger;
 
 class OTP extends \SimpleSAML_Auth_ProcessingFilter
 {
-
     /**
      * The API client identifier.
      *
