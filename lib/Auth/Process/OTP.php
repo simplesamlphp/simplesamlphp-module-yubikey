@@ -110,13 +110,13 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
         $this->keyIdAttr = $cfg->getString('key_id_attribute', 'yubikey');
         $this->assuranceAttr = $cfg->getString('assurance_attribute', 'eduPersonAssurance');
         $this->assuranceValue = $cfg->getString('assurance_value', 'OTP');
-        $this->apiHosts = $cfg->getArrayize('api_hosts', array(
+        $this->apiHosts = $cfg->getArrayize('api_hosts', [
             'api.yubico.com',
             'api2.yubico.com',
             'api3.yubico.com',
             'api4.yubico.com',
             'api5.yubico.com',
-        ));
+        ]);
         $this->remember = $cfg->getBoolean('just_once', true);
     }
 
@@ -154,7 +154,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
             return;
         }
 
-        $state['yubikey:otp'] = array(
+        $state['yubikey:otp'] = [
             'apiClient' => $this->apiClient,
             'apiKey' => $this->apiKey,
             'assuranceAttribute' => $this->assuranceAttr,
@@ -163,13 +163,13 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
             'keyIDs' => $attrs[$this->keyIdAttr],
             'authID' => $this->authid,
             'self' => $this,
-        );
+        ];
 
         Logger::debug('Initiating YubiKey authentication.');
 
         $sid = \SimpleSAML\Auth\State::saveState($state, 'yubikey:otp:init');
         $url = \SimpleSAML\Module::getModuleURL('yubikey/otp.php');
-        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, array('StateId' => $sid));
+        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, ['StateId' => $sid]);
     }
 
 
