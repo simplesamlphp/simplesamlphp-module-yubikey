@@ -1,11 +1,11 @@
 {
-  "invalid_state": {
-    "es": "Ha ocurrido un error inesperado mientras se verificaba su YubiKey."
-  },
-  "invalid_otp": {
-    "es": "La contrase&ntilde;a de un solo uso generada por su YubiKey no es v&aacute;lida. Por favor, aseg&uacute;rese de utilizar su YubiKey y no teclee manualmente."
-  },
-  "invalid_yubikey": {
-    "es": "La llave YubiKey utilizada no es v&aacute;lida. Aseg&uacute;rese de utilizar la YubiKey asociada con su cuenta de usuario."
-  }
+    "invalid_state": {
+        "es": "Ha ocurrido un error inesperado mientras se verificaba su YubiKey."
+    },
+    "invalid_otp": {
+        "es": "La contrase&ntilde;a de un solo uso generada por su YubiKey no es v&aacute;lida. Por favor, aseg&uacute;rese de utilizar su YubiKey y no teclee manualmente."
+    },
+    "invalid_yubikey": {
+        "es": "La llave YubiKey utilizada no es v&aacute;lida. Aseg&uacute;rese de utilizar la YubiKey asociada con su cuenta de usuario."
+    }
 }

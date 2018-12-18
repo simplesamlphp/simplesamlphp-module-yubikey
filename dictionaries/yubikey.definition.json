@@ -1,5 +1,5 @@
 {
-  "authenticate": {
-    "en": "Authenticate using a YubiKey"
-  }
+    "authenticate": {
+        "en": "Authenticate using a YubiKey"
+    }
 }
