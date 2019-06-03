@@ -12,7 +12,6 @@ use \SimpleSAML\Logger as Logger;
 
 class OTP extends \SimpleSAML_Auth_ProcessingFilter
 {
-
     /**
      * The API client identifier.
      *
@@ -104,20 +103,20 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
     {
         parent::__construct($config, $reserved);
 
-        $cfg = \SimpleSAML_Configuration::loadFromArray($config, 'yubikey:OTP');
+        $cfg = \SimpleSAML\Configuration::loadFromArray($config, 'yubikey:OTP');
         $this->apiClient = $cfg->getString('api_client_id');
         $this->apiKey = $cfg->getString('api_key');
         $this->abortIfMissing = $cfg->getBoolean('abort_if_missing', false);
         $this->keyIdAttr = $cfg->getString('key_id_attribute', 'yubikey');
         $this->assuranceAttr = $cfg->getString('assurance_attribute', 'eduPersonAssurance');
         $this->assuranceValue = $cfg->getString('assurance_value', 'OTP');
-        $this->apiHosts = $cfg->getArrayize('api_hosts', array(
+        $this->apiHosts = $cfg->getArrayize('api_hosts', [
             'api.yubico.com',
             'api2.yubico.com',
             'api3.yubico.com',
             'api4.yubico.com',
             'api5.yubico.com',
-        ));
+        ]);
         $this->remember = $cfg->getBoolean('just_once', true);
     }
 
@@ -131,7 +130,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
      */
     public function process(&$state)
     {
-        $session = \SimpleSAML_Session::getSessionFromRequest();
+        $session = \SimpleSAML\Session::getSessionFromRequest();
         $this->authid = $state['Source']['auth'];
         $key_id = $session->getData('yubikey:auth', $this->authid);
         $attrs = &$state['Attributes'];
@@ -155,7 +154,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
             return;
         }
 
-        $state['yubikey:otp'] = array(
+        $state['yubikey:otp'] = [
             'apiClient' => $this->apiClient,
             'apiKey' => $this->apiKey,
             'assuranceAttribute' => $this->assuranceAttr,
@@ -164,13 +163,13 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
             'keyIDs' => $attrs[$this->keyIdAttr],
             'authID' => $this->authid,
             'self' => $this,
-        );
+        ];
 
         Logger::debug('Initiating YubiKey authentication.');
 
-        $sid = \SimpleSAML_Auth_State::saveState($state, 'yubikey:otp:init');
+        $sid = \SimpleSAML\Auth\State::saveState($state, 'yubikey:otp:init');
         $url = \SimpleSAML\Module::getModuleURL('yubikey/otp.php');
-        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, array('StateId' => $sid));
+        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, ['StateId' => $sid]);
     }
 
 
@@ -187,8 +186,8 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
     public static function authenticate(array &$state, $otp)
     {
         // validate the state array we're given
-        if (!array_key_exists(\SimpleSAML_Auth_State::STAGE, $state) ||
-            $state[\SimpleSAML_Auth_State::STAGE] !== 'yubikey:otp:init') {
+        if (!array_key_exists(\SimpleSAML\Auth\State::STAGE, $state) ||
+            $state[\SimpleSAML\Auth\State::STAGE] !== 'yubikey:otp:init') {
             throw new \InvalidArgumentException("{yubikey:errors:invalid_state}");
         }
         $cfg = $state['yubikey:otp'];
@@ -222,7 +221,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
                 $state['yubikey:otp']['assuranceValue'];
 
             // keep authentication data in the session
-            $session = \SimpleSAML_Session::getSessionFromRequest();
+            $session = \SimpleSAML\Session::getSessionFromRequest();
             $session->setData('yubikey:auth', $cfg['authID'], $kid);
             $session->registerLogoutHandler(
                 $cfg['authID'],
@@ -243,7 +242,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
      */
     public function logoutHandler()
     {
-        $session = \SimpleSAML_Session::getSessionFromRequest();
+        $session = \SimpleSAML\Session::getSessionFromRequest();
         $keyid = $session->getData('yubikey:auth', $this->authid);
         Logger::info('Removing valid YubiKey authentication with key "'.$keyid.'".');
         $session->deleteData('yubikey:auth', $this->authid);

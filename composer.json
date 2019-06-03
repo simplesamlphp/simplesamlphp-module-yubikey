@@ -11,7 +11,10 @@
     ],
     "require": {
         "enygma/yubikey": "~3.2",
-        "simplesamlphp/composer-module-installer": "~1.1.5"
+        "simplesamlphp/composer-module-installer": "~1.1.6"
+    },
+    "require-dev": {
+        "simplesamlphp/simplesamlphp": "~1.17"
     }
 }
 

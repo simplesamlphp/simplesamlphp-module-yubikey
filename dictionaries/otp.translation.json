@@ -1,5 +1,5 @@
 {
-  "intro": {
-    "es": "Para completar su identificaci&oacute;n, es necesario que se autentique utilizando una llave YubiKey. Por favor, introduzca su YubiKey en un puerto USB y t&oacute;quela. El campo de texto a continuaci&oacute;n se rellenar&aacute; autom&aacute;ticamente con una clave segura de un solo uso."
-  }
+    "intro": {
+        "es": "Para completar su identificaci&oacute;n, es necesario que se autentique utilizando una llave YubiKey. Por favor, introduzca su YubiKey en un puerto USB y t&oacute;quela. El campo de texto a continuaci&oacute;n se rellenar&aacute; autom&aacute;ticamente con una clave segura de un solo uso."
+    }
 }
