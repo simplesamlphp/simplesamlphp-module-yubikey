@@ -14,7 +14,8 @@ $authStateId = $_REQUEST['StateId'];
 $state = \SimpleSAML\Auth\State::loadState($authStateId, 'yubikey:otp:init');
 
 $error = false;
-if (array_key_exists('otp', $_POST)) { // we were given an OTP
+if (array_key_exists('otp', $_POST)) {
+    // we were given an OTP
     try {
         if (\SimpleSAML\Module\yubikey\Auth\Process\OTP::authenticate($state, $_POST['otp'])) {
             \SimpleSAML_Auth_State::saveState($state, 'yubikey:otp:init');
