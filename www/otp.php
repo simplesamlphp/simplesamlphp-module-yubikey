@@ -18,8 +18,8 @@ if (array_key_exists('otp', $_POST)) {
     // we were given an OTP
     try {
         if (\SimpleSAML\Module\yubikey\Auth\Process\OTP::authenticate($state, $_POST['otp'])) {
-            \SimpleSAML_Auth_State::saveState($state, 'yubikey:otp:init');
-            \SimpleSAML_Auth_ProcessingChain::resumeProcessing($state);
+            \SimpleSAML\Auth\State::saveState($state, 'yubikey:otp:init');
+            \SimpleSAML\Auth\ProcessingChain::resumeProcessing($state);
         } else {
             $error = '{yubikey:errors:invalid_yubikey}';
         }

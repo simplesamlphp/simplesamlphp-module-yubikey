@@ -10,7 +10,7 @@ namespace SimpleSAML\Module\yubikey\Auth\Process;
 
 use \SimpleSAML\Logger as Logger;
 
-class OTP extends \SimpleSAML_Auth_ProcessingFilter
+class OTP extends \SimpleSAML\Auth\ProcessingFilter
 {
     /**
      * The API client identifier.
@@ -125,6 +125,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
      * Run the filter.
      *
      * @param array $state
+     * @return void
      *
      * @throws \Exception if there is no yubikey ID and we are told to abort in such case.
      */
@@ -239,6 +240,7 @@ class OTP extends \SimpleSAML_Auth_ProcessingFilter
     /**
      * A logout handler that makes sure to remove the key from the session, so that the user is asked for the key again
      * in case of a re-authentication with this very same session.
+     * @return void
      */
     public function logoutHandler()
     {

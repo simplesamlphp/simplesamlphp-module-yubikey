@@ -4,11 +4,11 @@ $this->data['autofocus'] = 'otp';
 
 $this->includeAtTemplateBase('includes/header.php');
 ?>
-    <!--<img style="float: right" src="<?php echo SimpleSAML\Module::getModuleURL('authYubiKey/resources/logo.jpg'); ?>"
+    <!--<img style="float: right" src="<?php echo \SimpleSAML\Module::getModuleURL('authYubiKey/resources/logo.jpg'); ?>"
          alt=""/>-->
     <h2 style=""><?php echo $this->t('{yubikey:yubikey:authenticate}'); ?></h2>
     <img style="float: right; max-height: 100px"
-         src="<?php echo SimpleSAML\Module::getModuleURL('yubikey/img/yubikey.png'); ?>" alt="YubiKey"/>
+         src="<?php echo \SimpleSAML\Module::getModuleURL('yubikey/img/yubikey.png'); ?>" alt="YubiKey"/>
     <form action="?" method="post" name="f">
         <p><?php echo $this->t('{yubikey:otp:intro}'); ?></p>
         <p><input id="otp" type="text" tabindex="2" name="otp"
