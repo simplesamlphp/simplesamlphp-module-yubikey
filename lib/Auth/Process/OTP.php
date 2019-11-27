@@ -149,7 +149,7 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
         }
 
         // check for previous auth
-        if (!is_null($key_id) && in_array($key_id, $attrs[$this->keyIdAttr])) {
+        if (!is_null($key_id) && in_array($key_id, $attrs[$this->keyIdAttr], true)) {
             // we were already authenticated using a valid yubikey
             Logger::info('Reusing previous YubiKey authentication with key "'.$key_id.'".');
             return;
@@ -210,7 +210,7 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
         $resp = $api->check($otp, true);
 
         // verify the identity corresponds to this user
-        if (!in_array($kid, $cfg['keyIDs'])) {
+        if (!in_array($kid, $cfg['keyIDs'], true)) {
             Logger::warning('The YubiKey "'.$kid.'" is not valid for this user.');
             Logger::stats('yubikey:otp: invalid YubiKey.');
             return false;
