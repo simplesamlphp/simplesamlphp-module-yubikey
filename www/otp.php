@@ -11,6 +11,7 @@ if (!array_key_exists('StateId', $_REQUEST)) {
     throw new \SimpleSAML\Error\BadRequest('Missing AuthState parameter.');
 }
 $authStateId = $_REQUEST['StateId'];
+/** @var array $state */
 $state = \SimpleSAML\Auth\State::loadState($authStateId, 'yubikey:otp:init');
 
 $error = false;
