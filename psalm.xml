@@ -6,7 +6,15 @@
 >
     <projectFiles>
         <directory name="lib" />
+        <directory name="templates" />
+        <directory name="tests" />
         <directory name="www" />
+
+        <!-- Ignore deprecated classes -->
+        <ignoreFiles>
+            <!-- Ignore deprecated PHP-templates - Remove for 2.0 -->
+            <file name="templates/*.tpl.php" />
+        </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
@@ -27,5 +35,12 @@
         <MissingParamType errorLevel="info" />
         <UnusedClass errorLevel="info" />
         <PossiblyUnusedMethod errorLevel="info" />
+
+        <!-- Ignore UnresolvableInclude on CLI-scripts -->
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <file name="tests/bootstrap.php" />
+            </errorLevel>
+        </UnresolvableInclude>
     </issueHandlers>
 </psalm>
