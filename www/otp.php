@@ -30,8 +30,9 @@ if (array_key_exists('otp', $_POST)) {
 }
 
 $cfg = \SimpleSAML\Configuration::getInstance();
-$tpl = new \SimpleSAML\XHTML\Template($cfg, 'yubikey:otp.php');
+$tpl = new \SimpleSAML\XHTML\Template($cfg, 'yubikey:otp.twig');
 $trans = $tpl->getTranslator();
 $tpl->data['params'] = ['StateId' => $authStateId];
-$tpl->data['error'] = ($error) ? $trans->t($error) : false;
-$tpl->show();
+$tpl->data['error'] = $error || false;
+$tpl->data['autofocus'] = 'otp';
+$tpl->send();

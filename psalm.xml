@@ -9,12 +9,6 @@
         <directory name="templates" />
         <directory name="tests" />
         <directory name="www" />
-
-        <!-- Ignore deprecated classes -->
-        <ignoreFiles>
-            <!-- Ignore deprecated PHP-templates - Remove for 2.0 -->
-            <file name="templates/*.tpl.php" />
-        </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>

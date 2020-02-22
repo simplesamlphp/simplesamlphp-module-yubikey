@@ -9,9 +9,16 @@
 
 namespace SimpleSAML\Module\yubikey\Auth\Process;
 
+use Exception;
+use InvalidArgumentException;
+use SimpleSAML\Auth;
+use SimpleSAML\Configuration;
+use SimpleSAML\Module;
 use SimpleSAML\Logger;
+use SimpleSAML\Session;
+use SimpleSAML\Utils;
 
-class OTP extends \SimpleSAML\Auth\ProcessingFilter
+class OTP extends Auth\ProcessingFilter
 {
     /**
      * The API client identifier.
@@ -104,7 +111,7 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
     {
         parent::__construct($config, $reserved);
 
-        $cfg = \SimpleSAML\Configuration::loadFromArray($config, 'yubikey:OTP');
+        $cfg = Configuration::loadFromArray($config, 'yubikey:OTP');
         $this->apiClient = $cfg->getString('api_client_id');
         $this->apiKey = $cfg->getString('api_key');
         $this->abortIfMissing = $cfg->getBoolean('abort_if_missing', false);
@@ -130,9 +137,9 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
      *
      * @throws \Exception if there is no yubikey ID and we are told to abort in such case.
      */
-    public function process(&$state)
+    public function process(array &$state): void
     {
-        $session = \SimpleSAML\Session::getSessionFromRequest();
+        $session = Session::getSessionFromRequest();
         $this->authid = $state['Source']['auth'];
         $key_id = $session->getData('yubikey:auth', $this->authid);
         $attrs = &$state['Attributes'];
@@ -140,7 +147,7 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
         // missing attribute, yubikey auth required
         if ($this->abortIfMissing && !array_key_exists($this->keyIdAttr, $attrs)) {
             // TODO: display an error page instead of an exception
-            throw new \Exception('Missing key ID.');
+            throw new Exception('Missing key ID.');
         }
 
         // missing attribute, but not required
@@ -169,9 +176,9 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
 
         Logger::debug('Initiating YubiKey authentication.');
 
-        $sid = \SimpleSAML\Auth\State::saveState($state, 'yubikey:otp:init');
-        $url = \SimpleSAML\Module::getModuleURL('yubikey/otp.php');
-        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, ['StateId' => $sid]);
+        $sid = Auth\State::saveState($state, 'yubikey:otp:init');
+        $url = Module::getModuleURL('yubikey/otp.php');
+        Utils\HTTP::redirectTrustedURL($url, ['StateId' => $sid]);
     }
 
 
@@ -185,21 +192,21 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
      * @throws \InvalidArgumentException if the state array is not in a valid stage or the given OTP has incorrect
      * length.
      */
-    public static function authenticate(array &$state, $otp)
+    public static function authenticate(array &$state, string $otp): bool
     {
         // validate the state array we're given
         if (
-            !array_key_exists(\SimpleSAML\Auth\State::STAGE, $state) ||
-            $state[\SimpleSAML\Auth\State::STAGE] !== 'yubikey:otp:init'
+            !array_key_exists(Auth\State::STAGE, $state) ||
+            $state[Auth\State::STAGE] !== 'yubikey:otp:init'
         ) {
-            throw new \InvalidArgumentException("{yubikey:errors:invalid_state}");
+            throw new InvalidArgumentException("{yubikey:errors:invalid_state}");
         }
         $cfg = $state['yubikey:otp'];
 
         // validate the OTP we are given
         $otplen = strlen($otp);
         if ($otplen < 32 || $otplen > 48) {
-            throw new \InvalidArgumentException('{yubikey:errors:invalid_otp}');
+            throw new InvalidArgumentException('{yubikey:errors:invalid_otp}');
         }
         $otp = strtolower($otp);
 
@@ -225,7 +232,7 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
                 $state['yubikey:otp']['assuranceValue'];
 
             // keep authentication data in the session
-            $session = \SimpleSAML\Session::getSessionFromRequest();
+            $session = Session::getSessionFromRequest();
             $session->setData('yubikey:auth', $cfg['authID'], $kid);
             $session->registerLogoutHandler(
                 $cfg['authID'],
@@ -245,9 +252,9 @@ class OTP extends \SimpleSAML\Auth\ProcessingFilter
      * in case of a re-authentication with this very same session.
      * @return void
      */
-    public function logoutHandler()
+    public function logoutHandler(): void
     {
-        $session = \SimpleSAML\Session::getSessionFromRequest();
+        $session = Session::getSessionFromRequest();
         $keyid = $session->getData('yubikey:auth', $this->authid);
         Logger::info('Removing valid YubiKey authentication with key "' . $keyid . '".');
         $session->deleteData('yubikey:auth', $this->authid);
