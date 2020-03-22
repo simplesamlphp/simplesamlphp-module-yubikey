@@ -2,6 +2,7 @@
     "name": "simplesamlphp/simplesamlphp-module-yubikey",
     "description": "A SimpleSAMLphp module that adds support for YubiKey devices.",
     "type": "simplesamlphp-module",
+    "license": "LGPL-2.1-or-later",
     "keywords": [ "simplesamlphp", "yubikey", "otp" ],
     "authors": [
         {
