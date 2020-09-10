@@ -3,7 +3,6 @@
 /**
  * An authentication processing filter that allows you to use your yubikey as an OTP second factor.
  *
- * @author Jaime Pérez Crespo, UNINETT AS <jaime.perez@uninett.no>
  * @package SimpleSAML\Module\yubikey
  */
 

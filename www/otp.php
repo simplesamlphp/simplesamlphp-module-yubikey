@@ -3,7 +3,6 @@
 /**
  * This page asks the user to authenticate using a Yubikey.
  *
- * @author Jaime Pérez Crespo, UNINETT AS <jaime.perez@uninett.no>.
  * @package SimpleSAMLphp\Module\yubikey
  */
 
