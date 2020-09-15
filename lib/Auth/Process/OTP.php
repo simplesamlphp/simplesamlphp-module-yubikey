@@ -132,7 +132,6 @@ class OTP extends Auth\ProcessingFilter
      * Run the filter.
      *
      * @param array $state
-     * @return void
      *
      * @throws \Exception if there is no yubikey ID and we are told to abort in such case.
      */
@@ -249,7 +248,6 @@ class OTP extends Auth\ProcessingFilter
     /**
      * A logout handler that makes sure to remove the key from the session, so that the user is asked for the key again
      * in case of a re-authentication with this very same session.
-     * @return void
      */
     public function logoutHandler(): void
     {
