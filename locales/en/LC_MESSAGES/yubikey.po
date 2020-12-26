@@ -15,6 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 
-msgid "{yubikey:authenticate}"
+msgid "Authenticate using a YubiKey"
 msgstr "Authenticate using a YubiKey"
 

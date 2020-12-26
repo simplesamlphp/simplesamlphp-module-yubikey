@@ -1,12 +1,11 @@
-{% set pagetitle = '{yubikey:yubikey:authenticate}'|trans %}
+{% set pagetitle = 'Authenticate using a YubiKey'|trans %}
 {% extends "base.twig" %}
 
 {% block content %}
-    <!--<img style="float: right" src="{{ asset('img/yubikey.jpg', 'authYubiKey') }}" alt=""/>-->
-    <h2>{{ '{yubikey:yubikey:authenticate}'|trans }}</h2>
+    <h2>{{ 'Authenticate using a YubiKey'|trans }}</h2>
     <img style="float: right; max-height: 100px" src="{{ asset('img/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
     <form action="?" method="post" name="f">
-        <p>{{ '{yubikey:otp:intro}'|trans }}</p>
+        <p>{{ 'In order to complete your login, you need to authenticate using a YubiKey. Please insert your YubiKey and touch it. The field below will then be filled out automatically with a secure one time password.'|trans }}</p>
         <p><input id="otp" type="text" tabindex="2" name="otp"
                   style="border: 1px solid #ccc; background: #eee; padding: .5em; font-size: medium; width: 70%;
                          color: #aaa; cursor: not-allowed" />
@@ -16,8 +15,8 @@
     {% endfor %}
 
     {% if error is not false %}
-        <div class="caution"><!-- style="border-left: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; background: #f5f5f5">-->
-            <h5>{{ '{login:error_header}'|trans }}</h5>
+        <div class="caution">
+            <h5>{{ 'Error'|trans }}</h5>
             <p>{{ error }}</p>
         </div>
     {% endif %}
