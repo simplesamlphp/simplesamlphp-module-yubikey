@@ -1,3 +1,7 @@
+![Build Status](https://github.com/simplesamlphp/simplesamlphp-module-yubikey/workflows/CI/badge.svg?branch=master)
+[![Coverage Status](https://codecov.io/gh/simplesamlphp/simplesamlphp-module-yubikey/branch/master/graph/badge.svg)](https://codecov.io/gh/simplesamlphp/simplesamlphp-module-yubikey)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/simplesamlphp/simplesamlphp-module-yubikey/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/simplesamlphp/simplesamlphp-module-yubikey/?branch=master)
+
 YubiKey
 =======
 
