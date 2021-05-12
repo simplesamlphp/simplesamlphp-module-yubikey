@@ -24,14 +24,14 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var string
      */
-    private $apiClient;
+    private string $apiClient;
 
     /**
      * The API key to use.
      *
      * @var string
      */
-    private $apiKey;
+    private string $apiKey;
 
     /**
      * An array of hosts to be used for API calls.
@@ -45,14 +45,14 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var array
      */
-    private $apiHosts;
+    private array $apiHosts;
 
     /**
      * Whether to abort authentication if no yubikey is known for the user or not.
      *
      * @var bool
      */
-    private $abortIfMissing;
+    private bool $abortIfMissing;
 
     /**
      * The name of the attribute containing the yubikey ID.
@@ -61,7 +61,7 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var string
      */
-    private $keyIdAttr;
+    private string $keyIdAttr;
 
     /**
      * The name of the attribute that expresses successful authentication with the yubikey.
@@ -70,7 +70,7 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var string
      */
-    private $assuranceAttr;
+    private string $assuranceAttr;
 
     /**
      * The value of the "assurance" attribute that conveys successful authentication with a yubikey.
@@ -79,7 +79,7 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var string
      */
-    private $assuranceValue;
+    private string $assuranceValue;
 
     /**
      * Whether to remember a previous authentication or keep asking.
@@ -88,14 +88,14 @@ class OTP extends Auth\ProcessingFilter
      *
      * @var boolean
      */
-    private $remember;
+    private bool $remember;
 
     /**
      * The auth source associated with this authproc.
      *
      * @var string
      */
-    private $authid;
+    private string $authid;
 
 
     /**
