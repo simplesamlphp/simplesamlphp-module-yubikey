@@ -72,7 +72,7 @@ class Yubikey
      * @param \Symfony\Component\HttpFoundation\Request $request The current request.
      * @return \SimpleSAML\XHTML\Template|\SimpleSAML\HTTP\RunnableResponse
      */
-    public function main(Request $request): Template
+    public function main(Request $request)
     {
         $stateId = $request->get('StateId');
         if ($stateId === null) {
