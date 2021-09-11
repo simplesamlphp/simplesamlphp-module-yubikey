@@ -175,7 +175,7 @@ class OTP extends Auth\ProcessingFilter
         Logger::debug('Initiating YubiKey authentication.');
 
         $sid = Auth\State::saveState($state, 'yubikey:otp:init');
-        $url = Module::getModuleURL('yubikey/otp.php');
+        $url = Module::getModuleURL('yubikey/otp');
 
         $httpUtils = new Utils\HTTP();
         $httpUtils->redirectTrustedURL($url, ['StateId' => $sid]);
