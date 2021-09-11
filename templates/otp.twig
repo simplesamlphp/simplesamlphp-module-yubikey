@@ -3,7 +3,7 @@
 
 {% block content %}
     <h2>{{ 'Authenticate using a YubiKey'|trans }}</h2>
-    <img style="float: right; max-height: 100px" src="{{ asset('img/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
+    <img style="float: right; max-height: 100px" src="{{ asset('image/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
     <form action="?" method="post" name="f">
         <p>{{ 'In order to complete your login, you need to authenticate using a YubiKey. Please insert your YubiKey and touch it. The field below will then be filled out automatically with a secure one time password.'|trans }}</p>
         <p><input id="otp" type="text" tabindex="2" name="otp"
