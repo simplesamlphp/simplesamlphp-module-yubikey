@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use SimpleSAML\Auth;
 use SimpleSAML\Configuration;
 use SimpleSAML\Error;
+use SimpleSAML\HTTP\RunnableResponse;
 use SimpleSAML\Module\yubikey\Auth\Process\OTP;
 use SimpleSAML\Session;
 use SimpleSAML\XHTML\Template;
@@ -27,6 +28,12 @@ class Yubikey
 
     /** @var \SimpleSAML\Session */
     protected Session $session;
+
+    /**
+     * @var \SimpleSAML\Auth\State|string
+     * @psalm-var \SimpleSAML\Auth\State|class-string
+     */
+    protected $authState = Auth\State::class;
 
 
     /**
@@ -49,10 +56,21 @@ class Yubikey
 
 
     /**
+     * Inject the \SimpleSAML\Auth\State dependency.
+     *
+     * @param \SimpleSAML\Auth\State $authState
+     */
+    public function setAuthState(Auth\State $authState): void
+    {
+        $this->authState = $authState;
+    }
+
+
+    /**
      * This page asks the user to authenticate using a Yubikey.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request The current request.
-     * @return \SimpleSAML\XHTML\Template
+     * @return \SimpleSAML\XHTML\Template|\SimpleSAML\HTTP\RunnableResponse
      */
     public function main(Request $request): Template
     {
@@ -62,7 +80,7 @@ class Yubikey
         }
 
         /** @var array $state */
-        $state = Auth\State::loadState($stateId, 'yubikey:otp:init');
+        $state = $this->authState::loadState($stateId, 'yubikey:otp:init');
 
         $error = false;
 
@@ -71,8 +89,8 @@ class Yubikey
             // we were given an OTP
             try {
                 if (OTP::authenticate($state, $otp)) {
-                    Auth\State::saveState($state, 'yubikey:otp:init');
-                    Auth\ProcessingChain::resumeProcessing($state);
+                    $this->authState::saveState($state, 'yubikey:otp:init');
+                    return new RunnableResponse([Auth\ProcessingChain::class, 'resumeProcessing'], [$state]);
                 } else {
                     $error = 'The YubiKey used is invalid. Make sure to use the YubiKey associated with your account.';
                 }
