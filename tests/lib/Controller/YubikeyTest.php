@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SimpleSAML\Test\Module\yubikey\Controller;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use SimpleSAML\Auth;
 use SimpleSAML\Configuration;
@@ -161,5 +162,38 @@ class YubikeyTest extends TestCase
 
         $this->assertTrue($response->isSuccessful());
         $this->assertInstanceOf(RunnableResponse::class, $response);
+    }
+
+
+    /**
+     * Test that accessing the otp-endpoint when an unexpected exception occurs returns a Template
+     *
+     * @return void
+     */
+    public function testOtpUnexpectedException(): void
+    {
+        $request = Request::create(
+            '/otp',
+            'GET',
+            ['StateId' => 'abc123', 'otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+        );
+
+        $c = new Controller\Yubikey($this->config, $this->session);
+        $c->setAuthState(new class () extends Auth\State {
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            {
+                return [];
+            }
+        });
+        $c->setOtp(new class (['api_client_id' => 'phpunit', 'api_key' => 'abc123'], []) extends OTP {
+            public static function authenticate(array &$state, string $otp): bool
+            {
+                throw new InvalidArgumentException("There was an unexpected error while trying to verify your YubiKey.");
+            }
+        });
+        $response = $c->main($request);
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertInstanceOf(Template::class, $response);
     }
 }
