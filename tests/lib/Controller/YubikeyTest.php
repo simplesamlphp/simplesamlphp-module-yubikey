@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use SimpleSAML\Auth;
 use SimpleSAML\Configuration;
 use SimpleSAML\Error;
+use SimpleSAML\HTTP\RunnableResponse;
 use SimpleSAML\Module\yubikey\Controller;
+use SimpleSAML\Module\yubikey\Auth\Process\OTP;
 use SimpleSAML\Session;
 use SimpleSAML\XHTML\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,7 +103,7 @@ class YubikeyTest extends TestCase
      *
      * @return void
      */
-    public function testOtp(): void
+    public function testOtpFailed(): void
     {
         $request = Request::create(
             '/otp',
@@ -113,20 +115,51 @@ class YubikeyTest extends TestCase
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
-                return [
-                    Auth\State::STAGE => 'yubikey:otp:init',
-                    'yubikey:otp' => [
-                        'apiKey' => 'abc123',
-                        'apiClient' => 'phpunit',
-                        'apiHosts' => ['example.org'],
-                        'keyIDs' => ['aa'],
-                    ],
-                ];
+                return [];
+            }
+        });
+        $c->setOtp(new class (['api_client_id' => 'phpunit', 'api_key' => 'abc123'], []) extends OTP {
+            public static function authenticate(array &$state, string $otp): bool
+            {
+                return false;
             }
         });
         $response = $c->main($request);
 
         $this->assertTrue($response->isSuccessful());
         $this->assertInstanceOf(Template::class, $response);
+    }
+
+
+    /**
+     * Test that accessing the otp-endpoint with valid otp returns RunnableResponse
+     *
+     * @return void
+     */
+    public function testOtpSucceeded(): void
+    {
+        $request = Request::create(
+            '/otp',
+            'GET',
+            ['StateId' => 'abc123', 'otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+        );
+
+        $c = new Controller\Yubikey($this->config, $this->session);
+        $c->setAuthState(new class () extends Auth\State {
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            {
+                return [];
+            }
+        });
+        $c->setOtp(new class (['api_client_id' => 'phpunit', 'api_key' => 'abc123'], []) extends OTP {
+            public static function authenticate(array &$state, string $otp): bool
+            {
+                return true;
+            }
+        });
+        $response = $c->main($request);
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertInstanceOf(RunnableResponse::class, $response);
     }
 }

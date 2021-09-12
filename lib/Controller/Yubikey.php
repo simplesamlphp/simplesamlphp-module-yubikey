@@ -35,6 +35,12 @@ class Yubikey
      */
     protected $authState = Auth\State::class;
 
+    /**
+     * @var \SimpleSAML\Module\yubikey\Auth\Process\OTP|string
+     * @psalm-var \SimpleSAML\Module\yubikey\Auth\Process\OTP|class-string
+     */
+    protected $otp = OTP::class;
+
 
     /**
      * Controller constructor.
@@ -67,6 +73,17 @@ class Yubikey
 
 
     /**
+     * Inject the \SimpleSAML\Module\yubikey\Auth\Process\OTP dependency.
+     *
+     * @param \SimpleSAML\Module\yubikey\Auth\Process\OTP $otp
+     */
+    public function setOtp(OTP $otp): void
+    {
+        $this->otp = $otp;
+    }
+
+
+    /**
      * This page asks the user to authenticate using a Yubikey.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request The current request.
@@ -88,7 +105,7 @@ class Yubikey
         if ($otp !== null) {
             // we were given an OTP
             try {
-                if (OTP::authenticate($state, $otp)) {
+                if ($this->otp::authenticate($state, $otp)) {
                     $this->authState::saveState($state, 'yubikey:otp:init');
                     return new RunnableResponse([Auth\ProcessingChain::class, 'resumeProcessing'], [$state]);
                 } else {
