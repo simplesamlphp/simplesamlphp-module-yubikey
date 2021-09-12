@@ -1,0 +1,3 @@
+yubikey-otp:
+    path:       /otp
+    defaults:   { _controller: 'SimpleSAML\Module\yubikey\Controller\Yubikey::main' }
