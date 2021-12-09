@@ -15,10 +15,10 @@
 
         "enygma/yubikey": "~3.3",
         "simplesamlphp/composer-module-installer": "~1.1.6",
-        "simplesamlphp/simplesamlphp": "dev-master"
+        "simplesamlphp/simplesamlphp": "^2.0.0-beta.2"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "~1.1.0"
+        "simplesamlphp/simplesamlphp-test-framework": "~1.1.4"
     }
 }
 
