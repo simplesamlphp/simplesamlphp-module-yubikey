@@ -91,7 +91,7 @@ class Yubikey
      */
     public function main(Request $request)
     {
-        $stateId = $request->get('StateId');
+        $stateId = $request->request->get('StateId');
         if ($stateId === null) {
             throw new Error\BadRequest('Missing AuthState parameter.');
         }
@@ -101,7 +101,7 @@ class Yubikey
 
         $error = false;
 
-        $otp = $request->get('otp');
+        $otp = $request->request->get('otp');
         if ($otp !== null) {
             // we were given an OTP
             try {
