@@ -21,6 +21,17 @@ command in the root of your SimpleSAMLphp installation:
 composer.phar require simplesamlphp/simplesamlphp-module-yubikey
 ```
 
+Then, you need to do is to enable the Yubikey module: in
+ `config.php`, search for the `module.enable` key and set `yubikey` to true:
+
+ ```
+     'module.enable' => [
+          'yubikey' => true,
+          …
+     ],
+ ```
+
+
 OTP authentication processing filter
 ------------------------------------
 
