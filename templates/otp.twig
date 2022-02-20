@@ -1,15 +1,16 @@
 {% set pagetitle = 'Authenticate using a YubiKey'|trans %}
 {% extends "base.twig" %}
 
+{% block preload %}
+<link rel="stylesheet" href="{{ asset('css/yubikey.css', 'yubikey') }}">
+{% endblock %}
+
 {% block content %}
     <h2>{{ 'Authenticate using a YubiKey'|trans }}</h2>
-    <img style="float: right; max-height: 100px" src="{{ asset('image/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
+    <img id="yubilogo" src="{{ asset('image/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
     <form action="?" method="post" name="f">
         <p>{{ 'In order to complete your login, you need to authenticate using a YubiKey. Please insert your YubiKey and touch it. The field below will then be filled out automatically with a secure one time password.'|trans }}</p>
-        <p><input id="otp" type="text" tabindex="2" name="otp"
-                  style="border: 1px solid #ccc; background: #eee; padding: .5em; font-size: medium; width: 70%;
-                         color: #aaa; cursor: not-allowed" />
-        </p>
+        <p><input id="otp" type="text" tabindex="2" name="otp" /></p>
     {% for name, value in params %}
         <input type="hidden" name="{{ name|escape('html_attr') }}" value="{{ value }}" />
     {% endfor %}
