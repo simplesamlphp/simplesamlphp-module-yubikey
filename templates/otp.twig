@@ -11,7 +11,7 @@
                          color: #aaa; cursor: not-allowed" />
         </p>
     {% for name, value in params %}
-        <input type="hidden" name="{{ name|escape('html') }}" value="{{ value|escape('html') }}" />
+        <input type="hidden" name="{{ name|escape('html_attr') }}" value="{{ value }}" />
     {% endfor %}
 
     {% if error is not false %}
