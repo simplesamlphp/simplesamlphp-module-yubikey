@@ -1,6 +1,8 @@
 ![Build Status](https://github.com/simplesamlphp/simplesamlphp-module-yubikey/workflows/CI/badge.svg?branch=master)
 [![Coverage Status](https://codecov.io/gh/simplesamlphp/simplesamlphp-module-yubikey/branch/master/graph/badge.svg)](https://codecov.io/gh/simplesamlphp/simplesamlphp-module-yubikey)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/simplesamlphp/simplesamlphp-module-yubikey/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/simplesamlphp/simplesamlphp-module-yubikey/?branch=master)
+[![Type Coverage](https://shepherd.dev/github/simplesamlphp/simplesamlphp-module-yubikey/coverage.svg)](https://shepherd.dev/github/simplesamlphp/simplesamlphp-module-yubikey)
+[![Psalm Level](https://shepherd.dev/github/simplesamlphp/simplesamlphp-module-yubikey/level.svg)](https://shepherd.dev/github/simplesamlphp/simplesamlphp-module-yubikey)
 
 YubiKey
 =======
@@ -17,14 +19,14 @@ Installation
 Once you have installed SimpleSAMLphp, installing this module is very simple. Just execute the following
 command in the root of your SimpleSAMLphp installation:
 
-```
+```shell
 composer.phar require simplesamlphp/simplesamlphp-module-yubikey
 ```
 
 Then, you need to do is to enable the Yubikey module: in
  `config.php`, search for the `module.enable` key and set `yubikey` to true:
 
- ```
+ ```php
      'module.enable' => [
           'yubikey' => true,
           …
