@@ -82,7 +82,7 @@ class YubikeyTest extends TestCase
         $request = Request::create(
             '/otp',
             'GET',
-            ['StateId' => 'abc123']
+            ['AuthState' => 'abc123']
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -107,9 +107,9 @@ class YubikeyTest extends TestCase
     public function testOtpFailed(): void
     {
         $request = Request::create(
-            '/otp',
-            'GET',
-            ['StateId' => 'abc123', 'otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            '/otp?AuthState=someState',
+            'POST',
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -140,9 +140,9 @@ class YubikeyTest extends TestCase
     public function testOtpSucceeded(): void
     {
         $request = Request::create(
-            '/otp',
-            'GET',
-            ['StateId' => 'abc123', 'otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            '/otp?AuthState=someState',
+            'POST',
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -173,9 +173,9 @@ class YubikeyTest extends TestCase
     public function testOtpUnexpectedException(): void
     {
         $request = Request::create(
-            '/otp',
-            'GET',
-            ['StateId' => 'abc123', 'otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            '/otp?AuthState=someState',
+            'POST',
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);

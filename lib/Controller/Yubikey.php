@@ -91,7 +91,7 @@ class Yubikey
      */
     public function main(Request $request)
     {
-        $stateId = $request->request->get('StateId');
+        $stateId = $request->query->get('AuthState');
         if ($stateId === null) {
             throw new Error\BadRequest('Missing AuthState parameter.');
         }
@@ -117,7 +117,7 @@ class Yubikey
         }
 
         $t = new Template($this->config, 'yubikey:otp.twig');
-        $t->data['params'] = ['StateId' => $stateId];
+        $t->data['AuthState'] = $stateId;
         $t->data['error'] = $error || false;
         $t->data['autofocus'] = 'otp';
 

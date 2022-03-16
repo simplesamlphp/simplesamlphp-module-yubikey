@@ -7,13 +7,10 @@
 
 {% block content %}
     <h2>{{ 'Authenticate using a YubiKey'|trans }}</h2>
-    <img id="yubilogo" src="{{ asset('image/yubikey.png', 'authYubiKey') }}" alt="YubiKey"/>
-    <form action="?" method="post" name="f">
+    <img id="yubilogo" src="{{ asset('image/yubikey.png', 'yubikey') }}" alt="YubiKey"/>
+    <form action="{{ moduleURL('yubikey/otp', {'AuthState': AuthState}) }}" method="post" name="f">
         <p>{{ 'In order to complete your login, you need to authenticate using a YubiKey. Please insert your YubiKey and touch it. The field below will then be filled out automatically with a secure one time password.'|trans }}</p>
-        <p><input id="otp" type="text" tabindex="2" name="otp" /></p>
-    {% for name, value in params %}
-        <input type="hidden" name="{{ name|escape('html_attr') }}" value="{{ value }}" />
-    {% endfor %}
+        <p><input id="otp" type="password" tabindex="2" name="otp" autocomplete="one-time-code"/></p>
 
     {% if error is not false %}
         <div class="caution">
