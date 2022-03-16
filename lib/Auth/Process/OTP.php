@@ -113,18 +113,14 @@ class OTP extends Auth\ProcessingFilter
         $cfg = Configuration::loadFromArray($config, 'yubikey:OTP');
         $this->apiClient = $cfg->getString('api_client_id');
         $this->apiKey = $cfg->getString('api_key');
-        $this->abortIfMissing = $cfg->getBoolean('abort_if_missing', false);
-        $this->keyIdAttr = $cfg->getString('key_id_attribute', 'yubikey');
-        $this->assuranceAttr = $cfg->getString('assurance_attribute', 'eduPersonAssurance');
-        $this->assuranceValue = $cfg->getString('assurance_value', 'OTP');
-        $this->apiHosts = $cfg->getArrayize('api_hosts', [
+        $this->abortIfMissing = $cfg->getOptionalBoolean('abort_if_missing', false);
+        $this->keyIdAttr = $cfg->getOptionalString('key_id_attribute', 'yubikey');
+        $this->assuranceAttr = $cfg->getOptionalString('assurance_attribute', 'eduPersonAssurance');
+        $this->assuranceValue = $cfg->getOptionalString('assurance_value', 'OTP');
+        $this->apiHosts = $cfg->getOptionalArrayize('api_hosts', [
             'api.yubico.com',
-            'api2.yubico.com',
-            'api3.yubico.com',
-            'api4.yubico.com',
-            'api5.yubico.com',
         ]);
-        $this->remember = $cfg->getBoolean('just_once', true);
+        $this->remember = $cfg->getOptionalBoolean('just_once', true);
     }
 
 

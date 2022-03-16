@@ -63,10 +63,6 @@ Here are all the options available:
     that hostname.
     This is optional and defaults to Yubico's public API servers, those being:
      - `api.yubico.com`
-     - `api2.yubico.com`
-     - `api3.yubico.com`
-     - `api4.yubico.com`
-     - `api5.yubico.com`
  
 **Operational configuration options**
 
