@@ -188,7 +188,9 @@ class YubikeyTest extends TestCase
         $c->setOtp(new class (['api_client_id' => 'phpunit', 'api_key' => 'abc123'], []) extends OTP {
             public static function authenticate(array &$state, string $otp): bool
             {
-                throw new InvalidArgumentException("There was an unexpected error while trying to verify your YubiKey.");
+                throw new InvalidArgumentException(
+                    "There was an unexpected error while trying to verify your YubiKey."
+                );
             }
         });
         $response = $c->main($request);
