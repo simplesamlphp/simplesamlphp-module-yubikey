@@ -96,7 +96,6 @@ class Yubikey
             throw new Error\BadRequest('Missing AuthState parameter.');
         }
 
-        /** @var array $state */
         $state = $this->authState::loadState($stateId, 'yubikey:otp:init');
 
         $error = false;
