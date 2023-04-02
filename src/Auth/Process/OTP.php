@@ -6,6 +6,8 @@
  * @package SimpleSAML\Module\yubikey
  */
 
+declare(strict_types=1);
+
 namespace SimpleSAML\Module\yubikey\Auth\Process;
 
 use Exception;
