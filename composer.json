@@ -20,6 +20,11 @@
         "simplesamlphp/simplesamlphp": "^2.0.0-rc2",
         "simplesamlphp/simplesamlphp-test-framework": "^1.5.4"
     },
+    "autoload": {
+        "psr-4": {
+            "SimpleSAML\\Module\\yubikey\\": "src/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
