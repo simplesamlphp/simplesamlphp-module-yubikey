@@ -5,3 +5,4 @@ yubikey-otp:
   defaults: {
     _controller: 'SimpleSAML\Module\yubikey\Controller\Yubikey::main'
   }
+  methods: [GET, POST]
