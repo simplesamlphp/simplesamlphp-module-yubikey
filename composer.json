@@ -11,14 +11,14 @@
         }
     ],
     "require": {
-        "php": ">=7.4 || ^8.0",
+        "php": "^8.0",
 
         "enygma/yubikey": "^3.3",
-        "symfony/http-foundation": "^5.4 || ^6.0"
+        "symfony/http-foundation": "^6.0"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp": "^2.0.0-rc2",
-        "simplesamlphp/simplesamlphp-test-framework": "^1.5.4"
+        "simplesamlphp/simplesamlphp": "^3@dev",
+        "simplesamlphp/simplesamlphp-test-framework": "^1.5.5"
     },
     "autoload": {
         "psr-4": {
