@@ -14,8 +14,8 @@ use Exception;
 use InvalidArgumentException;
 use SimpleSAML\Auth;
 use SimpleSAML\Configuration;
-use SimpleSAML\Module;
 use SimpleSAML\Logger;
+use SimpleSAML\Module;
 use SimpleSAML\Session;
 use SimpleSAML\Utils;
 
