@@ -190,8 +190,11 @@ class OTP extends Auth\ProcessingFilter
      * @throws \InvalidArgumentException if the state array is not in a valid stage or the given OTP has incorrect
      * length.
      */
-    public static function authenticate(array &$state, string $otp): bool
-    {
+    public static function authenticate(
+        array &$state,
+        #[\SensitiveParameter]
+        string $otp,
+    ): bool {
         // validate the state array we're given
         if (
             !array_key_exists(Auth\State::STAGE, $state) ||
