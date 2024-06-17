@@ -42,7 +42,7 @@ class YubikeyTest extends TestCase
                 'module.enable' => ['yubikey' => true],
             ],
             '[ARRAY]',
-            'simplesaml'
+            'simplesaml',
         );
 
         $this->session = Session::getSessionFromRequest();
@@ -60,7 +60,7 @@ class YubikeyTest extends TestCase
     {
         $request = Request::create(
             '/otp',
-            'GET'
+            'GET',
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -82,7 +82,7 @@ class YubikeyTest extends TestCase
         $request = Request::create(
             '/otp',
             'GET',
-            ['AuthState' => 'abc123']
+            ['AuthState' => 'abc123'],
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -109,7 +109,7 @@ class YubikeyTest extends TestCase
         $request = Request::create(
             '/otp?AuthState=someState',
             'POST',
-            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq'],
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -142,7 +142,7 @@ class YubikeyTest extends TestCase
         $request = Request::create(
             '/otp?AuthState=someState',
             'POST',
-            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq'],
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -175,7 +175,7 @@ class YubikeyTest extends TestCase
         $request = Request::create(
             '/otp?AuthState=someState',
             'POST',
-            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq']
+            ['otp' => 'aabbccddeeffgghhiijjkkllmmnnooppqq'],
         );
 
         $c = new Controller\Yubikey($this->config, $this->session);
@@ -189,7 +189,7 @@ class YubikeyTest extends TestCase
             public static function authenticate(array &$state, string $otp): bool
             {
                 throw new InvalidArgumentException(
-                    "There was an unexpected error while trying to verify your YubiKey."
+                    "There was an unexpected error while trying to verify your YubiKey.",
                 );
             }
         });
