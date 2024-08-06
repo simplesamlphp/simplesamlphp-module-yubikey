@@ -109,7 +109,7 @@ class Yubikey
 
         $t = new Template($this->config, 'yubikey:otp.twig');
         $t->data['AuthState'] = $stateId;
-        $t->data['error'] = $error || false;
+        $t->data['error'] = $error ?: false;
         $t->data['autofocus'] = 'otp';
 
         return $t;
