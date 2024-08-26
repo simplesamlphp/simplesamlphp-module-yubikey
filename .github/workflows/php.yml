@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@v6
+        uses: super-linter/super-linter/slim@v7
         env:
           SAVE_SUPER_LINTER_OUTPUT: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -273,6 +273,6 @@ jobs:
       (needs.unit-tests-linux.result == 'success' && needs.coverage.result == 'skipped')
 
     steps:
-      - uses: geekyeggo/delete-artifact@v4
+      - uses: geekyeggo/delete-artifact@v5
         with:
           name: coverage-data
