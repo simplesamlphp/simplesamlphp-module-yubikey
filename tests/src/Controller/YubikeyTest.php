@@ -87,7 +87,7 @@ class YubikeyTest extends TestCase
 
         $c = new Controller\Yubikey($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return [];
             }
@@ -114,7 +114,7 @@ class YubikeyTest extends TestCase
 
         $c = new Controller\Yubikey($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return [];
             }
@@ -147,7 +147,7 @@ class YubikeyTest extends TestCase
 
         $c = new Controller\Yubikey($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return [];
             }
@@ -180,7 +180,7 @@ class YubikeyTest extends TestCase
 
         $c = new Controller\Yubikey($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return [];
             }
