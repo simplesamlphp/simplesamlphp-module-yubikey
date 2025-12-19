@@ -24,14 +24,12 @@ use Symfony\Component\HttpFoundation\Request;
 class Yubikey
 {
     /**
-     * @var \SimpleSAML\Auth\State|string
-     * @psalm-var \SimpleSAML\Auth\State|class-string
+     * @var \SimpleSAML\Auth\State|class-string
      */
     protected $authState = Auth\State::class;
 
     /**
-     * @var \SimpleSAML\Module\yubikey\Auth\Process\OTP|string
-     * @psalm-var \SimpleSAML\Module\yubikey\Auth\Process\OTP|class-string
+     * @var \SimpleSAML\Module\yubikey\Auth\Process\OTP|class-string
      */
     protected $otp = OTP::class;
 

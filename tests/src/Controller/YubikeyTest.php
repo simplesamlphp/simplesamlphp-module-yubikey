@@ -53,8 +53,6 @@ class YubikeyTest extends TestCase
 
     /**
      * Test that accessing the otp-endpoint without state results in an error-response
-     *
-     * @return void
      */
     public function testOtpNoState(): void
     {
@@ -74,8 +72,6 @@ class YubikeyTest extends TestCase
 
     /**
      * Test that accessing the otp-endpoint without otp results in a Template
-     *
-     * @return void
      */
     public function testOtpNoOtp(): void
     {
@@ -101,8 +97,6 @@ class YubikeyTest extends TestCase
 
     /**
      * Test that accessing the otp-endpoint with invalid otp returns Template
-     *
-     * @return void
      */
     public function testOtpFailed(): void
     {
@@ -134,8 +128,6 @@ class YubikeyTest extends TestCase
 
     /**
      * Test that accessing the otp-endpoint with valid otp returns RunnableResponse
-     *
-     * @return void
      */
     public function testOtpSucceeded(): void
     {
@@ -167,8 +159,6 @@ class YubikeyTest extends TestCase
 
     /**
      * Test that accessing the otp-endpoint when an unexpected exception occurs returns a Template
-     *
-     * @return void
      */
     public function testOtpUnexpectedException(): void
     {
