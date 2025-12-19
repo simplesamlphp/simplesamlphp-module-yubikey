@@ -64,7 +64,7 @@ class YubikeyTest extends TestCase
         $c = new Controller\Yubikey($this->config, $this->session);
 
         $this->expectException(Error\BadRequest::class);
-        $this->expectExceptionMessage("BADREQUEST('%REASON%' => 'Missing AuthState parameter.')");
+        $this->expectExceptionMessage('"Missing AuthState parameter."');
 
         $c->main($request);
     }
